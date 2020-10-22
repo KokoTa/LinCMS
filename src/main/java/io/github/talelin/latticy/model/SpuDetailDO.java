@@ -1,4 +1,4 @@
-package io.github.talelin.latticy.bo;
+package io.github.talelin.latticy.model;
 
 import io.github.talelin.latticy.model.SpuDO;
 import lombok.Data;
@@ -6,15 +6,15 @@ import lombok.Data;
 import java.util.List;
 
 @Data
-public class SpuDetailBO extends SpuDO {
+public class SpuDetailDO extends SpuDO {
 
-    private String categoryName;
+  private String categoryName;
 
-    private String sketchSpecName;
+  private String sketchSpecName;
 
-    private String defaultSkuName;
+  private String defaultSkuTitle;
 
-    private List<String> bannerImgs;
+  private List<String> spuImgList;
 
-    private List<String> detailImgs;
+  private List<String> spuDetailImgList;
 }

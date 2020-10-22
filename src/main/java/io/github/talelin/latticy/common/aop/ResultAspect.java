@@ -22,6 +22,7 @@ import org.springframework.stereotype.Component;
 public class ResultAspect {
 
     // 语法解释：https://blog.csdn.net/mianyao1004/article/details/93656829
+    // https://blog.csdn.net/JinXYan/article/details/89302126
     @Pointcut("execution(public * io.github.talelin.latticy.controller..*.*(..))")
     public void handlePlaceholder() {
     }

@@ -4,6 +4,7 @@ import io.github.talelin.latticy.module.file.Uploader;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
 import org.springframework.core.annotation.Order;
 
 /**
@@ -22,4 +23,14 @@ public class UploaderConfiguration {
     public Uploader uploader(){
         return new LocalUploader();
     }
+
+    /**
+     * 覆盖上面默认的 uploader
+     * @return 七牛云上传实现类
+     */
+//    @Bean
+//    @Primary
+//    public Uploader qiniuUploader() {
+//        return new QiniuUploader();
+//    }
 }
