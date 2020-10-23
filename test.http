@@ -87,3 +87,30 @@ GET http://localhost:5000/v1/spu/page?pageNo=1&pageSize=10 HTTP/1.1
 GET http://localhost:5000/v1/spu/2/detail HTTP/1.1
 
 ###
+
+
+# 根据 SPU 获取 SKU
+GET http://localhost:5000/v1/sku/by/spu/2 HTTP/1.1
+
+###
+
+# 根据 SPU 获取规格名
+GET http://localhost:5000/v1/spec-key/by/spu/2 HTTP/1.1
+
+###
+
+# 新建 SPU
+POST http://localhost:5000/v1/spu HTTP/1.1
+Content-Type: application/json
+
+{
+  "title": "测试",
+  "category_id": 6,
+  "price": 100,
+  "online": 1,
+  "spu_img_list": ["http://xxxx", "http://oooo"],
+  "spu_detail_img_list": ["http://xxxx", "http://oooo"],
+  "spec_key_id_list": [1, 2, 3]
+}
+
+###

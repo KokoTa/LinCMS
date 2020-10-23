@@ -1,60 +1,45 @@
-/*
- * @Author: KokoTa
- * @Date: 2020-10-21 10:37:31
- * @LastEditTime: 2020-10-23 16:34:43
- * @LastEditors: KokoTa
- * @Description:
- * @FilePath: /lin-cms-spring-boot/src/main/java/io/github/talelin/latticy/controller/v1/SpuController.java
- */
 package io.github.talelin.latticy.controller.v1;
 
-import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import io.github.talelin.latticy.common.util.PageUtil;
-import io.github.talelin.latticy.dto.spu.SpuDTO;
-import io.github.talelin.latticy.model.SkuDO;
-import io.github.talelin.latticy.model.SpuDetailDO;
-import io.github.talelin.latticy.service.impl.SpuServiceImpl;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
-import io.github.talelin.latticy.model.SpuDO;
+import io.github.talelin.latticy.model.SpecKeyDO;
+import io.github.talelin.latticy.service.SpecKeyService;
+import io.github.talelin.latticy.service.impl.SpecKeyServiceImpl;
 import io.github.talelin.latticy.vo.CreatedVO;
 import io.github.talelin.latticy.vo.DeletedVO;
 import io.github.talelin.latticy.vo.PageResponseVO;
 import io.github.talelin.latticy.vo.UpdatedVO;
 
 import javax.validation.constraints.Min;
-import javax.validation.Valid;
+
+import java.util.List;
+
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Positive;
 
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
-
 /**
  * @author generator@TaleLin
- * @since 2020-10-21
+ * @since 2020-10-22
  */
 @RestController
-@RequestMapping("/v1/spu")
+@RequestMapping("/v1/spec-key")
 @Validated
-public class SpuController {
+public class SpecKeyController {
 
   @Autowired
-  SpuServiceImpl spuService;
+  private SpecKeyServiceImpl specKeyService;
 
   @PostMapping("")
-  public CreatedVO create(@RequestBody @Validated SpuDTO spuDTO) {
-    spuService.create(spuDTO);
+  public CreatedVO create() {
     return new CreatedVO();
   }
 
@@ -69,22 +54,26 @@ public class SpuController {
   }
 
   @GetMapping("/{id}")
-  public SpuDO get(@PathVariable(value = "id") @Positive(message = "{id.positive}") Long id) {
+  public SpecKeyDO get(@PathVariable(value = "id") @Positive(message = "{id.positive}") Long id) {
     return null;
   }
 
   @GetMapping("/page")
-  public PageResponseVO<SpuDO> page(
+  public PageResponseVO<SpecKeyDO> page(
       @RequestParam(name = "pageSize", required = false, defaultValue = "10") @Min(value = 1, message = "{page.count.min}") @Max(value = 30, message = "{page.count.max}") Long pageSize,
       @RequestParam(name = "pageNo", required = false, defaultValue = "1") @Min(value = 0, message = "{page.number.min}") Long pageNo) {
-    IPage<SpuDO> page = new Page<>(pageNo, pageSize);
-    IPage<SpuDO> result = spuService.getBaseMapper().selectPage(page, null);
-    return PageUtil.build(result);
+    return null;
   }
 
-  @GetMapping("/{id}/detail")
-  public List<SpuDetailDO> getDetail(@PathVariable @Positive Long id) {
-    return spuService.getDetail(id);
+  /**
+   * 获取可视规格
+   *
+   * @param spuId
+   * @return
+   */
+  @GetMapping("/by/spu/{spuId}")
+  public List<SpecKeyDO> getBySpuId(@PathVariable @Positive Long spuId) {
+    return specKeyService.getBySpuId(spuId);
   }
 
 }
